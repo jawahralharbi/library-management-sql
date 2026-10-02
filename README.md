@@ -1,9 +1,11 @@
+![Banner](SQLProjectBanner.png)
+
 # 📚 Library Management System (PostgreSQL)
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-4169E1?logo=postgresql&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
-
+![Banner](SQLProjectBanner.png)
 
 A complete library management database built **from scratch, step by step**, on PostgreSQL (Supabase).
 
