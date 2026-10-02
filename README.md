@@ -1,5 +1,3 @@
-![Banner](SQLProjectBanner.png)
-
 # 📚 Library Management System (PostgreSQL)
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-4169E1?logo=postgresql&logoColor=white)
