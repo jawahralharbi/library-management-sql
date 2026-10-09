@@ -183,6 +183,12 @@ FROM (VALUES
     ('الأشجار واغتيال مرزوق', 1, 'member3.demo@example.com', CURRENT_DATE - 1, CURRENT_DATE + 13, NULL, 'active')
 ) AS t(book_title, cn, member_email, loan_dt, due_dt, ret_dt, loan_status);
 
+-- Sync copy status for loans that were inserted as already returned
+UPDATE book_copies SET status = 'available'
+WHERE status = 'borrowed'
+  AND copy_id IN (SELECT copy_id FROM loans WHERE return_date IS NOT NULL)
+  AND copy_id NOT IN (SELECT copy_id FROM loans WHERE return_date IS NULL);
+
 
 -- OPTIONAL BONUS DATA — reservations, fines & reviews
 -- (Not part of the guided build; add these separately if you want
