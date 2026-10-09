@@ -41,13 +41,16 @@ FROM members m
 WHERE EXISTS (SELECT 1 FROM loans l WHERE l.member_id = m.member_id AND l.status = 'overdue')
 ORDER BY total_owed DESC;
 
--- 4) Books that have never been borrowed (LEFT JOIN + IS NULL, useful for weeding decisions)
+-- 4) Books that have never been borrowed (NOT EXISTS: no copy of the book has any loan)
 SELECT b.book_id, b.title, b.publication_year
 FROM books b
-LEFT JOIN book_copies bc ON bc.book_id = b.book_id
-LEFT JOIN loans l        ON l.copy_id  = bc.copy_id
-WHERE l.loan_id IS NULL
-GROUP BY b.book_id, b.title, b.publication_year;
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM book_copies bc
+    JOIN loans l ON l.copy_id = bc.copy_id
+    WHERE bc.book_id = b.book_id
+)
+ORDER BY b.title;
 
 -- 5) Average loan duration (in days) by category, only counting returned loans
 SELECT
